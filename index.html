@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>✨ Escanea mi amor ✨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle, #000, #300030);
+      font-family: 'Arial', sans-serif;
+      color: white;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2em;
+      text-shadow: 0 0 15px pink;
+      margin-bottom: 20px;
+    }
+
+    #qrcode {
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 0, 150, 0.8);
+    }
+
+    /* Corazones cayendo */
+    .falling-heart {
+      position: fixed;
+      top: -10px;
+      font-size: 24px;
+      color: red;
+      animation: fall 6s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 Escanea este QR 💖</h1>
+  <div id="qrcode"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    // Generar QR con el link de tu página principal
+    new QRCode(document.getElementById("qrcode"), {
+      text: "https://iverssondavid.github.io/para-ti/",
+      width: 200,
+      height: 200
+    });
+
+    // Corazones cayendo
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "falling-heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.fontSize = (20 + Math.random() * 30) + "px";
+      heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>
